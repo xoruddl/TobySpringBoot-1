@@ -15,16 +15,27 @@ import org.springframework.web.servlet.DispatcherServlet;
 @ComponentScan
 public class Springboot1Application {
 
+	@Bean
+	public ServletWebServerFactory servletWebServerFactory() {
+		return new TomcatServletWebServerFactory();
+	}
+
+	@Bean
+	public DispatcherServlet dispatcherServlet() {
+		return new DispatcherServlet();
+	}
+
 	public static void main(String[] args) {
 		AnnotationConfigWebApplicationContext applicationContext = new AnnotationConfigWebApplicationContext() {
 			@Override
 			protected void onRefresh(){
 				super.onRefresh();
 
-				ServletWebServerFactory serverFactory = new TomcatServletWebServerFactory();
+				ServletWebServerFactory serverFactory = this.getBean(ServletWebServerFactory.class);
+				DispatcherServlet dispatcherServlet = this.getBean(DispatcherServlet.class);
+
 				WebServer webServer = serverFactory.getWebServer(servletContext -> {
-					servletContext.addServlet("dispatcherServlet",
-							new DispatcherServlet(this))
+					servletContext.addServlet("dispatcherServlet", dispatcherServlet)
 							.addMapping("/*");
 				});
 				webServer.start();
