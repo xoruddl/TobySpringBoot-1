@@ -1,14 +1,9 @@
 package toby.springboot1;
 
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.tomcat.servlet.TomcatServletWebServerFactory;
-import org.springframework.boot.web.server.servlet.ServletWebServerFactory;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.DispatcherServlet;
+import toby.config.MySpringBootApplication;
 
-@MySpringBootAnnotation
+@MySpringBootApplication
 public class Springboot1Application {
 
 	public static void main(String[] args) {
