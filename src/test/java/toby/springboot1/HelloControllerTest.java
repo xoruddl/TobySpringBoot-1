@@ -10,8 +10,8 @@ class HelloControllerTest {
 
     @Test
     void helloController() {
-        // HelloService는 람다로 대체(테스트 대역), ApplicationContext는 출력용이라 null 전달
-        HelloController helloController = new HelloController(name -> name, null);
+        // HelloService는 람다로 대체(테스트 대역)
+        HelloController helloController = new HelloController(name -> name);
 
         String ret = helloController.hello("Test");
 
@@ -20,7 +20,7 @@ class HelloControllerTest {
 
     @Test
     void failsHelloController() {
-        HelloController helloController = new HelloController(name -> name, null);
+        HelloController helloController = new HelloController(name -> name);
 
         Assertions.assertThatThrownBy(() -> helloController.hello(null)).isInstanceOf(IllegalArgumentException.class);
         Assertions.assertThatThrownBy(() -> helloController.hello("")).isInstanceOf(IllegalArgumentException.class);
